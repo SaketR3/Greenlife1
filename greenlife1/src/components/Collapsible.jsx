@@ -1,7 +1,6 @@
 import {useState} from "react";
 
 export default function Collapsible(props) {
-    console.log(props.allOpen);
     const [open, setOpen] = useState(false);
 
     function toggle() {

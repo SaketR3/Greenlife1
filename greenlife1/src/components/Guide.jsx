@@ -80,7 +80,6 @@ export default function Guide(props) {
     prompt += "Don't give generic recommendations. "
     prompt += "Be conversational! "
     prompt += "Don't include any concluding sentences."
-    console.log(prompt);
   }
 
   useEffect(() => {

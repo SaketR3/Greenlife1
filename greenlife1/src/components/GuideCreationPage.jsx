@@ -61,16 +61,6 @@ export default function GuideCreationPage() {
 
     function handleFormSubmit(e) {
       e.preventDefault();
-      console.log(demographic,
-                  heatingMethod, 
-                  electricityAmount, 
-                  greenElectricity, 
-                  purchaseFrequency, 
-                  transportationType,
-                  drivingAmount,
-                  flyingAmount,
-                  home,
-                  budget);
       setFormSubmitted(false);            
       setTimeout(() => {setFormSubmitted(true)}, 0);
     }
