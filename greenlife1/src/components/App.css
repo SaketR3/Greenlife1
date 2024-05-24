@@ -398,6 +398,23 @@ a {
   text-align: center;
 }
 
+.guide-download-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: .6rem;
+}
+
+.download-link {
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  background-color: var(--primary-color);
+  color: white;
+  text-align: center;
+  padding: 7px;
+}
+
 .collapsible {
   /*background-color: #777;*/
   background-color: white;

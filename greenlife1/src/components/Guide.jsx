@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import OpenAI from 'openai';
+import { Page, Text, Font, View, Document, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
 import "dotenv"
 import './App.css';
 import Collapsible from './Collapsible';
@@ -10,6 +11,19 @@ import Collapsible from './Collapsible';
 const openai = new OpenAI({
   apiKey: import.meta.env.VITE_API_KEY,
   dangerouslyAllowBrowser: true
+});
+
+Font.register({
+  family: 'Hanken Grotesk',
+  fonts: [
+    {
+      src: '../../public/HankenGrotesk.ttf',
+    },
+    {
+      src: '../../public/HankenGrotesk-Bold.ttf',
+      fontWeight: 'bold'
+    },
+  ],
 });
 
 export default function Guide(props) {
@@ -78,7 +92,7 @@ export default function Guide(props) {
     prompt += "For each step, provide a few substeps and explain each substep. "
     prompt += "Separate each sub-step with a hyphen (-). "
     prompt += "Don't give generic recommendations. "
-    prompt += "Be conversational! "
+    prompt += "Be personalized, and - most importantly - be conversational! "
     prompt += "Don't include any concluding sentences."
   }
 
@@ -100,6 +114,54 @@ export default function Guide(props) {
     })();
   }, []);
 
+  const GuidePDF = () => (
+    <Document>
+      <Page>
+        <View style={styles.top}>
+          <Text style={styles.title}>Your Climate Guide</Text>
+          <Text> </Text>
+        </View>
+        <View style={styles.body}>
+          {steps.map((step) => 
+            (<View style={{ flexDirection: "column", width: 500 }}>
+              <Text style={{ fontWeight: 'bold' }}>{step.split("- ")[0]}</Text>
+              {step.split("- ").slice(1).map((substep) => 
+                <View style={{ flexDirection: "row", marginBottom: 4 }}>
+                  <Text style={{ marginHorizontal: 8 }}>•</Text>
+                  <Text>{substep}</Text>
+                </View>
+              )}
+              <Text> </Text>
+            </View>)
+          )}
+        </View>
+      </Page>
+    </Document>    
+  );
+
+  const styles = StyleSheet.create({
+    body: {
+      paddingTop: 20,
+      paddingBottom: 65,
+      paddingHorizontal: 35,
+      fontFamily: 'Hanken Grotesk',
+      fontSize: 14,
+    },
+    title: {
+      fontSize: 30,
+      paddingTop: 40,
+      paddingBottom: 20,
+      textAlign: 'center',
+      fontWeight: 'bold',
+      color: 'white',
+      fontFamily: 'Hanken Grotesk',
+    },
+    top: {
+      backgroundColor: '#05a11c',
+      paddingBottom: 0,
+    }
+  });
+
   return(<>
     <section aria-labelledby="guide-creation-page-guide">
       <div id="guide-background"> 
@@ -110,6 +172,16 @@ export default function Guide(props) {
                 <p className="guide-header" id="guide-creation-page-guide">Your Guide</p>
                 <p className="guide-footer">Click each card to see steps you can take!</p>
                 <p className="guide-footer">If you'd like to change your responses or generate a new guide, you can click "Resubmit" above.</p>
+                <div className="guide-download-section">
+                  <p className="guide-footer">If you're interested, you can click here to download your guide!</p>
+                  <div className="download-link">
+                    <PDFDownloadLink document={<GuidePDF />} fileName="Your Climate Guide.pdf">
+                      {({ blob, url, loading, error }) =>
+                          error ? 'An Error Occurred; Guide Not Available' : 'Download Guide'
+                      }
+                    </PDFDownloadLink>
+                  </div>
+                </div>
                 {steps.slice(1).map((step, index) => 
                   <Collapsible key={index} stepName={step.split("- ")[0]} substeps={step.split("- ").slice(1)} />
                 )}
