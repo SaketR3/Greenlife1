@@ -17,10 +17,10 @@ Font.register({
   family: 'Hanken Grotesk',
   fonts: [
     {
-      src: '../../public/HankenGrotesk.ttf',
+      src: '/HankenGrotesk.ttf',
     },
     {
-      src: '../../public/HankenGrotesk-Bold.ttf',
+      src: '/HankenGrotesk-Bold.ttf',
       fontWeight: 'bold'
     },
   ],
