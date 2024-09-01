@@ -13,7 +13,7 @@ Check out the web app here! [https://green-life.app/](https://green-life.app/)
 While there's lots of advice online about how people can decrease their carbon emissions, too much of it isn't relevant to a person's specific situation. People who bike to work don't need to drive less. And not everyone can afford to buy solar panels. It's too difficult to find advice that works for you.
 <br />
 <br />
-That's where this project comes in. I built a web app that uses the ChatGPT API to create a personalized climate guide for users. Users simply need fill out a few questions, and the web app will show them a series of <em>relevant steps</em> with <em>actionable items</em> they can take to decrease your carbon footprint <em>right now</em>. 
+That's where this project comes in. I built a web app that uses the ChatGPT API to create a personalized climate guide for users. Users simply need fill out a few questions, and the web app will show them a series of <em>relevant steps</em> with <em>actionable items</em> they can take to decrease their carbon footprint <em>right now</em>. 
 <br />
 <br />
 Generative AI technologies like ChatGPT have been touted as helping "boost productivity" and "enhance creativity," but I've always thought that LLMs could have better applications. With this project, I aimed to use generative AI to help solve a social problem (here, climate change) and I am happy to have used LLMs in this more unique manner. 
